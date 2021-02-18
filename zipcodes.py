@@ -5,6 +5,8 @@ Ben Sehnert
 """
 
 
+import sys
+
 germantown = [144, 119,140]
 manayaunk = [127]
 roxboro = [128]
@@ -17,7 +19,7 @@ def zipcodes_help(extended=False):
     """
 Help fn, explains how to use the program
     """
-    print("Help: welcome to gopuff delivery range zipcode training.")
+    print("Help: welcome to Manayaunk site delivery range zipcode training.")
     print("you can type q/quit any time to leave or h/help to review this info.\n\n")
     if extended:
         print("type in a number corresponding to one of the following terms to learn more")
@@ -45,24 +47,82 @@ Help fn, explains how to use the program
                         print("try again- you must enter a value in range 0 to 10 to learn about a term")
                 except ValueError:
                     print("try again- you must enter a numeric value to learn about a term")
-        
+
+
 def option_handler(opt):
     """
 Takes a number between 0 and 10 as sole arg.
 informs user about the choice associated with that number.
 see terms (list) in zipcodes_help to learn about the available choices.
     """
-    print("option handler recieved: ", opt)
+    if opt == 1:
+        print("operating mode: freestyle")
+        print("you will be tested with a random assortment of excersizes")
+    elif opt == 2:
+        print("operating mode: self directed")
+        print("choose the excersise you want to do and number of rounds per each")
+    # these names arent really accurate now that you defined them.
+    elif opt == 3:
+        print("option: list all")
+        print("Given an area, provide all zip codes associated with it.")
+        # if prompt():
+            # list_all()
+    elif opt == 4:
+        print("option: list one")
+        print("Match the correct zip code with a given area")
+    elif opt == 5:
+        print("option: reverse list all")
+        print("Given a zip code, provide the name of the area associated with it.")
+    elif opt == 6:
+        print("option: reverse list one")
+        print("Match the correct area with the given zip code.")
+    elif opt == 7:
+        print("option: rapid fire list all.")
+        print("Complete the challenge within alloted time to win the maximum possible points")
+    elif opt == 8:
+        print("option: rapid fire list one.")
+        print("Complete the challenge within alloted time to win the maximum possible points")
+    elif opt == 9:
+        print("option: rapid fire reverse list all")
+        print("Complete the challenge within alloted time to win the maximum possible points")
+    elif opt == 10:
+        print("option: rapid fire reverse list one")
+        print("Complete the challenge within alloted time to win the maximum possible points")
+        
     return 0
 
 def main():
     zipcodes_help()
     while True:
-        response = input("first, tell us if you want to play free style or self directed (type h for help)\n")
+        response = input("enter 1 for free style mode or 2 for self directed mode (type h for help)\n")
+        try:
+            int(response)
+            if int(response) == 1:
+                freestyle()
+            elif int(response) == 2:
+                self_directed()
+        except ValueError:
+            print("numeric value expected")
+            continue
         if response in ("h","help"):
             zipcodes_help(extended=True)
-        else:
-            print("cones")
+        if response in ("q", "quit"):
+            sys.exit(1)
+                
+def freestyle():
+    """[summary]
+    """
+    print("freestyle mode")
+    print()
+
+def self_directed():
+    """[summary]
+    """
+    print("self-directed mode")
+    print()
+
+
+        
             
 
 def list_all_zipcodes(area_name, area_list):
@@ -97,5 +157,8 @@ def reverse_list_all(area_name, area_list):
             return 1
         else:
             print("incorrect. try again")
+  
+list_all_zipcodes("manayaunk", manayaunk)
 
-main()
+
+# main()
