@@ -5,14 +5,32 @@ Ben Sehnert
 """
 
 
-import sys
 
-germantown = [144, 119,140]
-manayaunk = [127]
-roxboro = [128]
-east_falls = [129]
-narberth=['072']
-bala_cynwd = ['004',131]
+import sys
+import random
+
+all_zipcodes = {"germantown" : ['144', '119','140'], "manayunk" : '127',
+"roxborough" : '128', "east falls" : '129', "narberth" : '072',
+"bala cynwd" : ['004', '131'] }
+
+germantown = ['144', '119','140']
+manayunk = '127'
+roxborough = '128'
+narberth='072'
+east_falls = '129'
+bala_cynwd = ['004','131']
+
+area_zipcodes = [manayunk, roxborough, east_falls, narberth]
+area_zipcodes.extend(germantown)
+area_zipcodes.extend(bala_cynwd)
+area_names = list(all_zipcodes.keys())
+
+def test():
+    # for i in all_zipcodes:
+    #     print(all_zipcodes[i])
+    # for i in area_zipcodes:
+    #     print(i)
+    multiple_choice()
 
 
 def zipcodes_help(extended=False):
@@ -25,10 +43,10 @@ Help fn, explains how to use the program
         print("type in a number corresponding to one of the following terms to learn more")
         print("ie. to learn more about 'freestyle mode' type 1 and hit enter\n")
         terms = ["operating mode: freestyle", "operating mode: self-directed",
-                 "option: list all", "option: list one", "option : reverse list all",
-                 "option : reverse list one", "option : rapid fire list one",
-                 "option : rapid fire list all", "option : rapid fire reverse list all",
-                 "option: rapid fire reverse list one"]
+                 "excersise: list all", "excersise: list one", "excersise : reverse list all",
+                 "excersise : reverse list one", "excersise : rapid fire list one",
+                 "excersise : rapid fire list all", "excersise : rapid fire reverse list all",
+                 "excersise: rapid fire reverse list one"]
         for x,y in enumerate(terms):
             print(f"{x+1}\t\t\t{y}")
         while True:
@@ -42,14 +60,14 @@ Help fn, explains how to use the program
                 try:
                     response = int(response)
                     if response < 11 and response > 0:
-                        option_handler(response)
+                        excersise_handler(response)
                     else:
                         print("try again- you must enter a value in range 0 to 10 to learn about a term")
                 except ValueError:
                     print("try again- you must enter a numeric value to learn about a term")
 
 
-def option_handler(opt):
+def excersise_handler(opt):
     """
 Takes a number between 0 and 10 as sole arg.
 informs user about the choice associated with that number.
@@ -61,34 +79,40 @@ see terms (list) in zipcodes_help to learn about the available choices.
     elif opt == 2:
         print("operating mode: self directed")
         print("choose the excersise you want to do and number of rounds per each")
-    # these names arent really accurate now that you defined them.
     elif opt == 3:
-        print("option: list all")
-        print("Given an area, provide all zip codes associated with it.")
+        print("Excersise: list all")
+        print("Cycle through the list of all area names and answer with the correct zipcodes to pass.")
+        print("possible points: 10")
         # if prompt():
             # list_all()
     elif opt == 4:
-        print("option: list one")
+        print("Excersise: list one")
         print("Match the correct zip code with a given area")
+        print("Possbile Points: 1")
     elif opt == 5:
-        print("option: reverse list all")
-        print("Given a zip code, provide the name of the area associated with it.")
+        print("Excersise: reverse list all")
+        print("Cycle through the list of all zip codes and match with the correct zipcodes to pass")
+        print("Possible points: 10")
     elif opt == 6:
-        print("option: reverse list one")
-        print("Match the correct area with the given zip code.")
+        print("Excersise: reverse list one")
+        print("Match the correct area name with a given zip code.")
+        print("Possible points: 1")
     elif opt == 7:
-        print("option: rapid fire list all.")
+        print("Excersise: rapid fire list all.")
         print("Complete the challenge within alloted time to win the maximum possible points")
+        print("Possible points: 15")
     elif opt == 8:
-        print("option: rapid fire list one.")
+        print("Excersise: rapid fire list one.")
         print("Complete the challenge within alloted time to win the maximum possible points")
+        print("Possible points: 15")
     elif opt == 9:
-        print("option: rapid fire reverse list all")
+        print("Excersise: rapid fire reverse list all")
         print("Complete the challenge within alloted time to win the maximum possible points")
+        print("possible points: 15")
     elif opt == 10:
-        print("option: rapid fire reverse list one")
+        print("Excersise: rapid fire reverse list one")
         print("Complete the challenge within alloted time to win the maximum possible points")
-        
+        print("possible points: 15")
     return 0
 
 def main():
@@ -113,7 +137,7 @@ def freestyle():
     """[summary]
     """
     print("freestyle mode")
-    print()
+    possible_excersises = ['list_one', 'reverse_list_one']
 
 def self_directed():
     """[summary]
@@ -122,10 +146,23 @@ def self_directed():
     print()
 
 
-        
-            
+def multiple_choice():
+    options = ['a','b','c','d']
+    areas = random.sample(area_names, 4)
+    correct_zipcode = random.choice(area_zipcodes) 
+    # correct_area = 
+    print("what is the area ")
+    print(correct_zipcode)
+    for x,y in zip(options, areas):
+        print(f"[{x}] {y}")
+    while True:
+        response = input()
+        if response in options:
+            # if areas[option.index(areas)]
 
-def list_all_zipcodes(area_name, area_list):
+
+
+def list_one(area_name, area_list):
     """
 asks the user for zipcodes until they listed all
     """
@@ -138,13 +175,13 @@ asks the user for zipcodes until they listed all
             print("correct")
             if len(area_list):
                 print("there are still more to list")
-                return list_all_zipcodes(area_name, area_list)
+                return list_one(area_name, area_list)
             else:
                 return 1
         else:
             print("not correct. try again")
 
-def reverse_list_all(area_name, area_list):
+def reverse_list_one(area_name, area_list):
     while True:
         print("what area has the followng zip codes?")
         for item in area_list:
@@ -158,7 +195,13 @@ def reverse_list_all(area_name, area_list):
         else:
             print("incorrect. try again")
   
-list_all_zipcodes("manayaunk", manayaunk)
+# list_all_zipcodes("manayaunk", manayaunk)
+# for i in area_names:
+#     print(i)
+
+# multiple_choice()
 
 
+
+test()
 # main()
