@@ -9,21 +9,15 @@ Ben Sehnert
 import sys
 import random
 
-all_zipcodes = {"germantown" : ['144', '119','140'], "manayunk" : '127',
-"roxborough" : '128', "east falls" : '129', "narberth" : '072',
-"bala cynwd" : ['004', '131'] }
+all_zipcodes = {"germantown"  : '144', "mt airy" :'119',
+"nicetown" : '140', "east germantown" : '118',
+"manayunk" : '127', "roxborough" : '128', "east falls" : '129',
+"narberth" : '072', "bala cynwd" : '004',  "wynnefield" : '131' }
 
-germantown = ['144', '119','140']
-manayunk = '127'
-roxborough = '128'
-narberth='072'
-east_falls = '129'
-bala_cynwd = ['004','131']
+all_zipcodes = [i for i in list(all_zipcodes.keys())]
+all_area_names = [i for i in list(all_zipcodes.values())]
 
-area_zipcodes = [manayunk, roxborough, east_falls, narberth]
-area_zipcodes.extend(germantown)
-area_zipcodes.extend(bala_cynwd)
-area_names = list(all_zipcodes.keys())
+
 
 def test():
     # for i in all_zipcodes:
