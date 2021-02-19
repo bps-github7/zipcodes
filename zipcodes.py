@@ -14,8 +14,8 @@ all_zipcodes = {"germantown"  : '144', "mt airy" :'119',
 "manayunk" : '127', "roxborough" : '128', "east falls" : '129',
 "narberth" : '072', "bala cynwd" : '004',  "wynnefield" : '131' }
 
-all_zipcodes = [i for i in list(all_zipcodes.keys())]
-all_area_names = [i for i in list(all_zipcodes.values())]
+all_area_names = [i for i in list(all_zipcodes.keys())]
+all_area_zipcodes = [i for i in list(all_zipcodes.values())]
 
 
 
@@ -24,7 +24,7 @@ def test():
     #     print(all_zipcodes[i])
     # for i in area_zipcodes:
     #     print(i)
-    multiple_choice()
+    multiple_choice(hard=True)
 
 
 def zipcodes_help(extended=False):
@@ -140,11 +140,18 @@ def self_directed():
     print()
 
 
-def multiple_choice():
+def multiple_choice(hard=False):
     options = ['a','b','c','d']
-    areas = random.sample(area_names, 4)
-    correct_zipcode = random.choice(area_zipcodes) 
-    # correct_area = 
+    correct_zipcode = random.choice(all_area_zipcodes) 
+    correct_area = all_area_names[all_area_zipcodes.index(correct_zipcode)]
+    copy = all_area_names[:]
+    copy.remove(correct_area)
+    
+    areas = random.sample(copy, 3)
+    areas.append(correct_area)
+    random.shuffle(areas)
+    # # Testing:
+    # print(f"the zipcode for {correct_area} is {correct_zipcode}")
     print("what is the area ")
     print(correct_zipcode)
     for x,y in zip(options, areas):
@@ -152,42 +159,51 @@ def multiple_choice():
     while True:
         response = input()
         if response in options:
-            # if areas[option.index(areas)]
-
-
-
-def list_one(area_name, area_list):
-    """
-asks the user for zipcodes until they listed all
-    """
-    while True:
-        provided = input(f"enter a 3 digit zipcode ending for {area_name}:\n")
-        if provided in ("q","quit"):
-            return 0
-        if int(provided) in area_list:
-            area_list.remove(int(provided))
-            print("correct")
-            if len(area_list):
-                print("there are still more to list")
-                return list_one(area_name, area_list)
-            else:
+            if response in ("q","quit"):
+                return 0
+            elif areas[options.index(response)] == correct_area:
+                print("correct")
                 return 1
-        else:
-            print("not correct. try again")
+            else:
+                print("incorrect")
+                if hard:
+                    return 0
+                print("try again")
 
-def reverse_list_one(area_name, area_list):
-    while True:
-        print("what area has the followng zip codes?")
-        for item in area_list:
-            print(item)
-        provided = input()
-        if provided in ("q","quit"):
-            return 0
-        if provided == area_name:
-            print("correct")
-            return 1
-        else:
-            print("incorrect. try again")
+
+
+# def list_one(area_name, area_list):
+#     """
+# asks the user for zipcodes until they listed all
+#     """
+#     while True:
+#         provided = input(f"enter a 3 digit zipcode ending for {area_name}:\n")
+#         if provided in ("q","quit"):
+#             return 0
+#         if int(provided) in area_list:
+#             area_list.remove(int(provided))
+#             print("correct")
+#             if len(area_list):
+#                 print("there are still more to list")
+#                 return list_one(area_name, area_list)
+#             else:
+#                 return 1
+#         else:
+#             print("not correct. try again")
+
+# def reverse_list_one(area_name, area_list):
+#     while True:
+#         print("what area has the followng zip codes?")
+#         for item in area_list:
+#             print(item)
+#         provided = input()
+#         if provided in ("q","quit"):
+#             return 0
+#         if provided == area_name:
+#             print("correct")
+#             return 1
+#         else:
+#             print("incorrect. try again")
   
 # list_all_zipcodes("manayaunk", manayaunk)
 # for i in area_names:
