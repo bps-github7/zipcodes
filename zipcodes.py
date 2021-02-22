@@ -24,7 +24,8 @@ def test():
     #     print(all_zipcodes[i])
     # for i in area_zipcodes:
     #     print(i)
-    multiple_choice(hard=True)
+    # multiple_choice(hard=True)
+    list_one()
 
 
 def zipcodes_help(extended=False):
@@ -36,7 +37,7 @@ Help fn, explains how to use the program
     if extended:
         print("type in a number corresponding to one of the following terms to learn more")
         print("ie. to learn more about 'freestyle mode' type 1 and hit enter\n")
-        terms = ["operating mode: freestyle", "operating mode: self-directed",
+        terms = ["operating mode : freestyle", "operating mode: self-directed",
                  "excersise: list all", "excersise: list one", "excersise : reverse list all",
                  "excersise : reverse list one", "excersise : rapid fire list one",
                  "excersise : rapid fire list all", "excersise : rapid fire reverse list all",
@@ -131,13 +132,16 @@ def freestyle():
     """[summary]
     """
     print("freestyle mode")
-    possible_excersises = ['list_one', 'reverse_list_one']
+    possible_excersises = ['list_one', 'list_all', 'reverse_list_one', 'reverse_list_all', 'rapid fire']
+    while True:
+        for x,y in enumerate(possible_excersises):
+            print(f'[{x}] {y}')
 
 def self_directed():
     """[summary]
     """
     print("self-directed mode")
-    print()
+    print("choose which excersise to do and how many of each")
 
 
 def multiple_choice(hard=False):
@@ -172,24 +176,22 @@ def multiple_choice(hard=False):
 
 
 
-# def list_one(area_name, area_list):
-#     """
-# asks the user for zipcodes until they listed all
-#     """
-#     while True:
-#         provided = input(f"enter a 3 digit zipcode ending for {area_name}:\n")
-#         if provided in ("q","quit"):
-#             return 0
-#         if int(provided) in area_list:
-#             area_list.remove(int(provided))
-#             print("correct")
-#             if len(area_list):
-#                 print("there are still more to list")
-#                 return list_one(area_name, area_list)
-#             else:
-#                 return 1
-#         else:
-#             print("not correct. try again")
+def list_one(area_name, area_list):
+    """
+asks the user for zipcodes until they listed all
+    """
+    correct_zipcode = 
+    while True:
+        provided = input(f"enter a 3 digit zipcode ending for {area_name}:\n")
+        if provided in ("q","quit"):
+            return 0
+        
+        
+        if all_area_names[int(provided)] in area_list:
+            print("correct")
+            return 1
+        else:
+            print("not correct. try again")
 
 # def reverse_list_one(area_name, area_list):
 #     while True:
